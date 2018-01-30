@@ -31,5 +31,5 @@ singletons:
   - com.networknt.cors.CorsHttpHandler
 # GraphQL schema provider interface implementation
 - com.networknt.graphql.router.SchemaProvider:
-  - com.networknt.subscription.schema.SubscriptionSchemaIDL
+  - com.networknt.examples.graphql.hackernews.HackerNewsSchema
 
