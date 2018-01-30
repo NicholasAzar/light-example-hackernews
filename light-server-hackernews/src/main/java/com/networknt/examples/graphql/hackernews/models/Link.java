@@ -1,7 +1,7 @@
 package com.networknt.examples.graphql.hackernews.models;
 
 import lombok.Data;
-import org.joda.time.DateTime;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -10,11 +10,18 @@ import java.util.List;
  */
 
 @Data
+@NoArgsConstructor
 public class Link {
     private String id;
-    private DateTime createdAt;
+    private String createdAt;
     private String description;
     private String url;
     private User postedBy;
     private List<Vote> votes;
+
+    public Link(String id, String description, String url) {
+        this.id = id;
+        this.description = description;
+        this.url = url;
+    }
 }
