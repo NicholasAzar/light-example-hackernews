@@ -1,5 +1,3 @@
-# import Link, Vote, LinkSubscriptionPayload, VoteSubscriptionPayload from "./generated/prisma.graphql"
-
 type Vote {
   id: ID! @unique
   link: Link!
@@ -8,7 +6,7 @@ type Vote {
 
 type Link {
   id: ID! @unique
-  createdAt: DateTime!
+  createdAt: String!
   description: String!
   url: String!
   postedBy: User
@@ -26,7 +24,7 @@ type User {
 
 type LinkPreviousValues {
   id: ID!
-  createdAt: DateTime!
+  createdAt: String!
   description: String!
   url: String!
 }
@@ -49,7 +47,6 @@ enum MutationType {
   UPDATED
   DELETED
 }
-
 
 type LinkSubscriptionPayload {
   mutation: MutationType!
@@ -86,8 +83,19 @@ type AuthPayload {
   user: User
 }
 
-type User {
+type VoteSubscriptionPayload {
+  mutation: MutationType!
+  node: Vote
+  updatedFields: [String!]
+  previousValues: VotePreviousValues
+}
+
+type VotePreviousValues {
   id: ID!
-  name: String!
-  email: String!
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription
 }
