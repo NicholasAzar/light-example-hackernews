@@ -19,9 +19,10 @@ public class Link {
     private User postedBy;
     private List<Vote> votes;
 
-    public Link(String id, String description, String url) {
+    public Link(String id, String description, String url, String createdAt) {
         this.id = id;
         this.description = description;
         this.url = url;
+        this.createdAt = createdAt;
     }
 }

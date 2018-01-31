@@ -24,6 +24,9 @@ public class HackerNewsSchema implements SchemaProvider {
         return RuntimeWiring.newRuntimeWiring()
                 .type(TypeRuntimeWiring.newTypeWiring("Query")
                         .dataFetcher("feed", HackerNewsWiring.feedDataFetcher))
+                .type(TypeRuntimeWiring.newTypeWiring("Mutation")
+                        .dataFetcher("post", HackerNewsWiring.createLink )
+                )
                 .build();
     }
 
