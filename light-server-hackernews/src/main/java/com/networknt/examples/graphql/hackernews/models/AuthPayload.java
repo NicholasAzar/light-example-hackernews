@@ -1,5 +1,6 @@
 package com.networknt.examples.graphql.hackernews.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -7,6 +8,7 @@ import lombok.Data;
  */
 
 @Data
+@AllArgsConstructor
 public class AuthPayload {
     private String token;
     private User user;

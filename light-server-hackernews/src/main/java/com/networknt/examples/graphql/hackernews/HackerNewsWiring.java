@@ -36,6 +36,13 @@ public class HackerNewsWiring {
     static DataFetcher login = dataFetchingEnvironment -> {
         String email = dataFetchingEnvironment.getArgument("email");
         String password = dataFetchingEnvironment.getArgument("password");
-        return hackerNewsDao.getToken(email, password);
+        return hackerNewsDao.getAuthPayload(email, password);
+    };
+
+    static DataFetcher signUp = dataFetchingEnvironment -> {
+        String name = dataFetchingEnvironment.getArgument("name");
+        String email = dataFetchingEnvironment.getArgument("email");
+        String password = dataFetchingEnvironment.getArgument("password");
+        return hackerNewsDao.signUp(name, email, password);
     };
 }

@@ -1,6 +1,7 @@
 package com.networknt.examples.graphql.hackernews;
 
 import com.networknt.examples.graphql.hackernews.enums.LinkOrderByInput;
+import com.networknt.examples.graphql.hackernews.models.AuthPayload;
 import com.networknt.examples.graphql.hackernews.models.Feed;
 import com.networknt.examples.graphql.hackernews.models.Link;
 import com.networknt.examples.graphql.hackernews.models.User;
@@ -50,12 +51,18 @@ public class HackerNewsDao {
         return link;
     }
 
-    public String getToken(String email, String password) {
+    public AuthPayload getAuthPayload(String email, String password) {
         User user = new User(null, email, password);
-        Set<User> users = context.users.stream().filter(eachUser -> eachUser.equals(user)).collect(Collectors.toSet());
-        if (users.size() > 0) {
-            return "sometoken";
+        List<User> users = context.users.stream().filter(eachUser -> eachUser.equals(user)).collect(Collectors.toList());
+        if (users != null && users.size() > 0) { // Assume there is 0 or 1 if non-null.
+            return new AuthPayload("sometoken", users.get(0));
         }
         return null;
+    }
+
+    public AuthPayload signUp(String name, String email, String password) {
+        User user = new User(name, email, password);
+        context.users.add(user);
+        return new AuthPayload("sometoken", user);
     }
 }
