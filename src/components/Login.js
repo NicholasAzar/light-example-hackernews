@@ -61,8 +61,13 @@ class Login extends Component {
                     password
                 }
             });
-            const {token} = result.data.login;
-            this._saveUserData(token);
+            if (result.data.login) {
+                const {token} = result.data.login;
+                this._saveUserData(token);
+                this.props.history.push('/');
+            } else {
+                alert('Invalid login credentials provided.')
+            }
         } else {
             const result = await this.props.signupMutation({
                 variables: {
@@ -71,10 +76,13 @@ class Login extends Component {
                     name
                 }
             });
-            const {token} = result.data.signup;
-            this._saveUserData(token)
+            if (result.data.signup) {
+                const {token} = result.data.signup;
+                this._saveUserData(token)
+            } else {
+                alert('A user with that email already exists.')
+            }
         }
-        this.props.history.push('/');
     };
 
     _saveUserData = token => {
