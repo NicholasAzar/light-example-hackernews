@@ -36,7 +36,7 @@ public class User {
         this.id = new String(messageDigest.digest(), UTF_8);
         this.name = name;
         this.email = email;
-        messageDigest.update(plaintextPassword.getBytes());
+        messageDigest.update(plaintextPassword.getBytes(UTF_8));
         this.password = new String(messageDigest.digest(), UTF_8);
     }
 

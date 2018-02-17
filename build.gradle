@@ -1,0 +1,24 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'com.networknt'
+  version = '1.0.0'
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+  tasks.withType(JavaCompile) {
+  	options.encoding = 'UTF-8'
+  }
+
+  
+  repositories {
+    mavenLocal()
+    
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://code.lds.org/nexus/content/groups/main-repo" }
+  }
+}

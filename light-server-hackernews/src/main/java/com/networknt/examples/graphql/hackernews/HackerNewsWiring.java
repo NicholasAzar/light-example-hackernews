@@ -5,10 +5,12 @@ import com.networknt.examples.graphql.hackernews.models.Feed;
 import com.networknt.examples.graphql.hackernews.models.Link;
 import com.networknt.examples.graphql.hackernews.models.User;
 import com.networknt.examples.graphql.hackernews.models.Vote;
+import com.networknt.examples.graphql.hackernews.utils.HttpUtils;
 import graphql.schema.DataFetcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +23,7 @@ import java.util.Set;
 public class HackerNewsWiring {
 
     private static HackerNewsDao hackerNewsDao = new HackerNewsDao();
+
 
     static DataFetcher feedDataFetcher = dataFetchingEnvironment -> {
         return hackerNewsDao.getFeed(null, 0, 0, null);
@@ -45,4 +48,14 @@ public class HackerNewsWiring {
         String password = dataFetchingEnvironment.getArgument("password");
         return hackerNewsDao.signUp(name, email, password);
     };
+
+    static DataFetcher getUsers = dataFetchingEnvironment -> {
+        try {
+            return HttpUtils.sendGet(List.class, "localhost:80801/v1/users");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    };
+
 }

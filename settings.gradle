@@ -1,0 +1,8 @@
+rootProject.name = 'light-example-hackernews'
+include ':light-server-hackernews'
+include ':light-server-user'
+include ':light-server-hackernews-common'
+
+project(':light-server-hackernews').projectDir = "$rootDir/light-server-hackernews" as File
+project(':light-server-user').projectDir = "$rootDir/light-server-user" as File
+project(':light-server-hackernews-common').projectDir = "$rootDir/light-server-hackernews-common" as File
